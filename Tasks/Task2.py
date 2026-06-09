@@ -288,6 +288,16 @@ class Adeept_SPI_LedPixel(threading.Thread):
             
     
 if __name__ == "__main__":
+
+    import time
+    import os
+
+    print("spidev version is ", spidev.__version__)
+    print("spidev device as show:")
+    s.system("ls /dev/spi*")
+
+    led = Adeept_SPI_LedPixel(14, 255)
+
     if led.check_spi_state() == 0:
         print("Erreur : SPI non disponible.")
     else:
