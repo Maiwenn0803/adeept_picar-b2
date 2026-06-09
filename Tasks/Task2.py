@@ -264,7 +264,7 @@ class Adeept_SPI_LedPixel(threading.Thread):
             self.lightChange()
             pass
 
-    def setLED(numero_led, couleur, intensite):
+    def setLED(self, numero_led, couleur, intensite=255):
         if numero_led < 0 or numero_led > 13:
             print("Numéro de LED invalide (0 à 13)")
             return
@@ -282,8 +282,8 @@ class Adeept_SPI_LedPixel(threading.Thread):
             print("Couleur invalide. Utilisez R, G, B ou N.")
             return
 
-        led.set_led_color(numero_led, r, g, b)
-        led.show()
+        self.set_led_color(numero_led, r, g, b)
+        self.show()
         print(f"LED {numero_led} → couleur {couleur}, intensité {intensite}")
             
     
@@ -294,7 +294,7 @@ if __name__ == "__main__":
 
     print("spidev version is ", spidev.__version__)
     print("spidev device as show:")
-    s.system("ls /dev/spi*")
+    os.system("ls /dev/spi*")
 
     led = Adeept_SPI_LedPixel(14, 255)
 
@@ -324,7 +324,7 @@ if __name__ == "__main__":
                 try:
                     numero  = int(parts[0])
                     couleur = parts[1].upper()
-                    setLED(numero, couleur)
+                    led.setLED(numero, couleur)
                 except ValueError:
                     print("Format invalide. Exemple : NumLED Couleur")
 
@@ -333,7 +333,7 @@ if __name__ == "__main__":
                     numero    = int(parts[0])
                     couleur   = parts[1].upper()
                     intensite = int(parts[2])
-                    setLED(numero, couleur, intensite)
+                    led.setLED(numero, couleur, intensite)
                 except ValueError:
                     print("Format invalide. Exemple : NumLED Couleur Intensite")
 
