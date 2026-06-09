@@ -18,5 +18,5 @@ if __name__ == "__main__":
         print(f"Light Tracking Value: {adc_value}")
         time.sleep(0.5)
 # Le programme affiche la valeur de luminosite captee par les deux capteurs place a l'avant du robot
-# La valeur est commune au deux capteurs qui augmente en exposant l'un des capteur et bouchant l'autre et diminuant en bouchant l'un des capteur et exposant l'autre
-# Il peut etre utilise afin de connaitre la luminosite et savoir s'il peut y avoir des confusions au niveau des capteurs de suivi de ligne
+# La valeur est commune au deux capteurs qui augmente quand la lumiere viend de gauche et diminue quand elle vient de droite
+# Il peut etre utilise afin de diriger le robot vers la plus grande source de lumiere
