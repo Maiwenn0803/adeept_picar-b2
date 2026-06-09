@@ -25,4 +25,8 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         pass
 
-
+#le programme affiche toute les 0.3 secondes une detection avec les capteurs 
+#on voit les 3 capteur : droite milieu gauche, si le capteur ne detecte pas de ligne il met 0 par contre sinon il met 1
+# on peut l'utiliser en imaginant une ligne de la taille des 3 capteurs, on lui dit que s'il ne voit plus de ligne sur l'un des trois il tourne pour se retrouver
+#sur la ligne (pour suivre la ligne)
+# la seconde option est de lui dire que s'il détecte une ligne il tourne pour ne pas dépasser de la ligne.
