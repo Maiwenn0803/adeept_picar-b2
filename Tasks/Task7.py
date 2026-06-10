@@ -1,12 +1,12 @@
 import threading
 import time
-from task1 import *
-from task2 import *
-from task3 import *
-from task4 import *
+from Task1 import *
+from Task2 import *
+from Task3 import *
+from Task4 import *
 from Task5 import *
-from task6 import *
-from task9 import *
+from Task6 import *
+from Task9 import *
 
 running = True
 
