@@ -28,11 +28,11 @@ def follow_line():
         print("reste droit")
 
     elif l == 1 and m == 1 and r == 0:
-        # Ligne légèrement à gauche → corriger vers la gauche
+        # Ligne légèrement à gauche => corriger vers la gauche
         servo.set_angle(0,110)
 
     elif l == 0 and m == 1 and r == 1:
-        # Ligne légèrement à droite → corriger vers la droite
+        # Ligne légèrement à droite => corriger vers la droite
         servo.set_angle(0,120)
     current_throttle = target
     Task4.set_throttle(target)
