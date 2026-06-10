@@ -1,6 +1,6 @@
-import task4
+import Task4
 from Task5 import *
-from task6 import *
+from Task6 import *
 
 def auto_stop_distance():
     dist = checkdist()
