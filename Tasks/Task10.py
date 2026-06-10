@@ -40,14 +40,14 @@ from Task2     import Adeept_SPI_LedPixel  # LEDs WS2812
 OBSTACLE_THRESHOLD_MM = 200         # 20 cm en millimètres
 
 # --- Vitesses moteur (0–100 %) ---
-FORWARD_SPEED         = 30          # vitesse de suivi de lumière
-REVERSE_SPEED         = 20          # vitesse de recul (réduite)
+FORWARD_SPEED         = 40          # vitesse de suivi de lumière
+REVERSE_SPEED         = 35          # vitesse de recul (réduite)
 RAMP_DURATION         = 0.7        # durée d'une rampe d'accélération (s)
 
 # --- Direction (servo canal 0) ---
 STEER_CHANNEL         = 0           # canal PCA9685 du servo de direction
-STEER_CENTER          = 90          # angle neutre (roues droites)
-STEER_MAX_TURN        = 40          # amplitude de braquage max (±40°)
+STEER_CENTER          = 100          # angle neutre (roues droites)
+STEER_MAX_TURN        = 60          # amplitude de braquage max (±40°)
 
 # --- Capteur de lumière ---
 LIGHT_CENTER          = 128         # valeur neutre du capteur (à calibrer)
@@ -105,7 +105,7 @@ def compute_steering(light_value):
     normalized = max(-1.0, min(1.0, offset / LIGHT_CENTER))
 
     # Conversion en angle servo
-    angle = STEER_CENTER + normalized * STEER_MAX_TURN
+    angle = STEER_CENTER - normalized * STEER_MAX_TURN
     return round(angle, 1)
 
 
