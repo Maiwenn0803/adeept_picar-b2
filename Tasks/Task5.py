@@ -7,7 +7,7 @@ sensor = DistanceSensor(echo=Ec, trigger=Tr,max_distance=2) # Maximum detection 
 
 # Get the distance of ultrasonic detection.
 def checkdist():
-    return (sensor.distance) *10 # Unit: cm
+    return sensor.distance * 1000  # Unit: mm
 
 if __name__ == "__main__":
     while True:
