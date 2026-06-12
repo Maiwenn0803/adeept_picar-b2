@@ -1,5 +1,7 @@
 import threading
 import time
+import sys
+import select
 from Task1 import *
 from Task2 import *
 from Task3 import *
@@ -7,6 +9,7 @@ from Task4 import *
 from Task5 import *
 from Task6 import *
 from Task9 import *
+from Task11 import *
 
 running = True
 
@@ -103,15 +106,16 @@ def manual_control_loop_test():
         print("4 : Test de rampe standard (0 à 100% en 1.0s, maintient 2s, puis retour à 0)")
         print("5 : Commande générique (Vitesse, Sens, Pente de rampe)")
         print("6 : Commande avec durée (Vitesse, Sens, Durée de rampe)")
+        print("7 : Commande pour suivi de ligne")
         print("q : Arrêt et quitter")
 
-        choice = input("\ Votre choix : ").strip().lower()
+        choice = input(" Votre choix : ").strip().lower()
         
         if choice == '1':
             drive_low_speed(1)
         elif choice == '2':
             drive_low_speed(-1)
-        elif choice == '3':
+        elif choice in ('3', 'a'):
             motorStop()
         elif choice == '4':
             print("\n--- Début du test de rampe standard ---")
@@ -130,6 +134,36 @@ def manual_control_loop_test():
             sens = get_int_input("Direction (1=Avant, -1=Arrière, 0=Arrêt) : ", 1)
             duree = get_float_input("Durée de la rampe (secondes) : ", 1.0)
             drive_with_ramp(speed, sens, duree)
+        elif choice == '7':
+            print("Pour démarrer : M  |  Pour arrêter : A  |  Pour quitter ce mode : q")
+            mode_actif = False
+            while True:
+                # Vérifie si une touche est disponible sans bloquer
+                if select.select([sys.stdin], [], [], 0)[0]:
+                    cmd = sys.stdin.read(1).lower() # Lecture d'un seul caractère
+                    if cmd == 'm':
+                        mode_actif = True
+                        print("Démarrage du suivi de ligne")
+                    elif cmd == 'a':
+                        mode_actif = False
+                        motorStop()
+                        set_angle(0, 100)
+                        print("Arrêt manuel demandé")
+                    elif cmd == 'q':
+                        mode_actif = False
+                        motorStop()
+                        set_angle(0, 100)
+                        print("Quitter mode 7")
+                        break
+                
+                if mode_actif:
+                    # follow_line de Task11 gère aussi l'arrêt par 'a' et renvoie False si besoin
+                    mode_actif = follow_line()
+                    if not mode_actif:
+                        print("Mode suivi de ligne interrompu.")
+                    time.sleep(0.05)
+                else:
+                    time.sleep(0.1)
         elif choice == 'q':
             print("\nArrêt global demandé...")
             running = False
