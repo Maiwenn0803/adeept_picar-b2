@@ -107,6 +107,7 @@ def manual_control_loop_test():
         print("5 : Commande générique (Vitesse, Sens, Pente de rampe)")
         print("6 : Commande avec durée (Vitesse, Sens, Durée de rampe)")
         print("7 : Commande pour suivi de ligne")
+        print("8 : Évitement d'obstacles (Mission C)")
         print("q : Arrêt et quitter")
 
         choice = input(" Votre choix : ").strip().lower()
@@ -164,6 +165,15 @@ def manual_control_loop_test():
                     time.sleep(0.05)
                 else:
                     time.sleep(0.1)
+        elif choice == '8':
+            print("Mission C – Évitement d'obstacles")
+            print("Ctrl+C pour revenir au menu")
+            try:
+                mission_c.run()
+            except KeyboardInterrupt:
+                motorStop()
+                set_angle(0, 105)
+                print("Mission C interrompue.")
         elif choice == 'q':
             print("\nArrêt global demandé...")
             running = False
